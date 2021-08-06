@@ -18,8 +18,8 @@ def float32_uint8(x):
 img_1 = get_image(img_1_path)
 img_2 = get_image(img_2_path)
 
-img_1 = img_1[:, :, [4, 3, 2]]
-img_2 = img_2[:, :, [4, 3, 2]]
+img_1 = img_1[:, :, [1, 2, 3]]
+img_2 = img_2[:, :, [1, 2, 3]]
 
 # both opencv and matplotlib can show numpy.float32.
 # plt.imshow(img_1)

@@ -44,11 +44,33 @@ def write_geotiff(name, prediction, original_path):
         band.WriteArray(prediction[:, :, b1])
 
 
+def plot_mask(result):
+
+    arr_2d = result
+    arr_3d = np.zeros((arr_2d.shape[0], arr_2d.shape[1], 3), dtype=np.uint8)
+    for c, i in palette.items():
+        m = arr_2d == c
+        arr_3d[m] = i
+    plt.imshow(arr_3d)
+
+
+palette = {0: (255, 255, 255),  # White
+           6: (0, 191, 255),  # DeepSkyBlue
+           1: (34, 139, 34),  # ForestGreen
+           3: (255, 0, 255),  # Magenta
+           2: (0, 255, 0),  # Lime
+           5: (255, 127, 80),  # Coral
+           4: (255, 0, 0),  # Red
+           7: (0, 255, 255),  # Cyan
+           8: (0, 255, 0),  # Lime
+           9: (0, 128, 128), # other
+           }
+
 if __name__ == '__main__':
     path = 'image/'
     # img_2020 = cv.imread(path + '2020.tif', flags=cv.IMREAD_LOAD_GDAL)
     # cv.imshow('2020', img_2020)
-
-    image_2020 = get_image(raster_path=path + '2020_warp.tif')
-    plt.imshow(image_2020[:, :, [0]])
+    image_2020 = get_image(raster_path=path + 'mask_28.tif')
+    print(image_2020.shape)
+    plot_mask(image_2020[:, :, 0])
     plt.show()
